@@ -24,7 +24,7 @@ jobs:
     - name: Docker
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
-        name: wartemis/engine-planet-wars
+        name: robindebruin/wartemis-planet-wars
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
         tags: "${{ env.BRANCH }}"
