@@ -1,0 +1,12 @@
+{
+  "name": "bottlebats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "websocket": "^1.0.31"
+  }
+}

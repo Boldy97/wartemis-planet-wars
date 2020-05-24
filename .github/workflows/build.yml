@@ -1,0 +1,30 @@
+name: build
+
+on:
+  push:
+    branches:
+    - master
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+
+    - name: Extract branch name
+      id: extract_branch
+      run: echo ::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/})
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Docker
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: wartemis/engine-planet-wars
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        tags: "${{ env.BRANCH }}"
