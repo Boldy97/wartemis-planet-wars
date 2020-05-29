@@ -28,15 +28,24 @@ const BOTS = validBots.reduce((acc,val) => {
 
 /* Wrapper for new formatting */
 
-function handleStateMessage(connection, message) {
-	connection.bot.processData(transformInput(message.state));
-	if(!message.players.includes(connection.id)) {
+let bots = {}; // game.key => bot
+
+
+function handleStateMessage(connection, botClass, message) {
+	let bot = bots[message.key];
+	if(!bot) {
+		bot = bots[message.key] = new botClass(1, 0);
+	}
+	bot.processData(transformInput(message.state));
+	if(!message.move) {
 		return;
 	}
 	sendMessage(connection, {
 		type: 'action',
+		game: message.game,
+		key: message.key,
 		action: {
-			moves: transformOutput(connection.bot.getMoves())
+			moves: transformOutput(bot.getMoves())
 		}
 	});
 }
@@ -140,10 +149,9 @@ function handleMessage(connection, bot, message) {
 
   switch(message.type) {
     case 'connected': handleConnectedMessage(connection, bot, message); break;
-    case 'registered': handleRegisteredMessage(connection, message, bot); break;
-    case 'invite': handleInviteMessage(connection, bot, message); break;
-    case 'state': handleStateMessage(connection, message); break;
-    case 'stop': handleStopMessage(connection, message); break;
+    case 'registered': handleRegisteredMessage(connection, message); break;
+    case 'state': handleStateMessage(connection, bot, message); break;
+    case 'error': handleErrorMessage(connection, message); break;
   }
 }
 
@@ -161,16 +169,9 @@ function handleConnectedMessage(connection, bot, message) {
 }
 
 function handleRegisteredMessage(connection, message, bot) {
-  console.log(`Registered with id ${message.id}!`);
-  connection.id = message.id;
-  connection.bot = new bot(message.id, 0);
+  console.log(`Registered!`);
 }
 
-function handleInviteMessage(connection, bot, message) {
-  console.log(`invited to room ${message.room}!`);
-  setupNewSocket(URL + '/' + message.room, bot);
-}
-
-function handleStopMessage(connection, message) {
-  connection.close();
+function handleErrorMessage(connection, message) {
+  console.log(JSON.stringify(message));
 }
