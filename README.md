@@ -1,5 +1,7 @@
 # Wartemis Planet Wars Bot
 
+[mesh example](https://i.imgur.com/hiq87WM.png)
+
 This is a bot for [Wartemis](https://github.com/Project-Wartemis) (that I also maintain), which is live on [wartemis.com](www.wartemis.com).
 At the moment it is pretty much a clone of my implementation on my [other repository](https://github.com/Boldy97/Bottlebats).
 
@@ -55,8 +57,6 @@ Reduces the game complexity by creating a mesh, using the connections between pl
 
 Note: Creating this mesh is inspired by the algorithm that [RIP](https://en.wikipedia.org/wiki/Routing_Information_Protocol) is based on. More specifically the [Bellman-Ford algorithm](https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm), but applied to all nodes.
 Note: Creating this mesh is of time complexity O(N³). Not that optimal, but should it not have created a network after 500ms, it temporarily acts like [Medium](#medium)
-
-![mesh example](https://i.imgur.com/hiq87WM.png)
 
 ### Elite
 
