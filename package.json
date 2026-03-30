@@ -1,5 +1,5 @@
 {
-  "name": "bottlebats",
+  "name": "bot-planet-wars-mine",
   "version": "1.0.0",
   "description": "",
   "main": "run.js",
@@ -7,6 +7,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "websocket": "^1.0.31"
+    "websocket": "^1.0.35"
   }
 }
