@@ -3,10 +3,10 @@
 /* Variables */
 
 let validBots = ['BotDead','BotEasy','BotMedium','BotHard','BotElite'];
-let URL = 'https://localhost:8080/socket';
-//const URL = 'https://api.wartemis.com/socket';
+//let URL = 'ws://localhost:8080/socket';
+let URL = 'wss://wartemis.vectordungeon.com/api/socket';
 if(process.env.DOCKER) {
-  URL = 'https://pw-backend/socket';
+  URL = process.env.SOCKET_URL || URL;
 }
 
 /* Imports */
